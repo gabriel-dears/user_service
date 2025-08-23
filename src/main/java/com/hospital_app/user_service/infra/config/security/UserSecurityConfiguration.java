@@ -22,8 +22,8 @@ public class UserSecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/user").hasRole("ADMIN")
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/user/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oAuth2Customizer)
