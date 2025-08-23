@@ -22,6 +22,7 @@ public class UserSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/login/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oAuth2Customizer)
