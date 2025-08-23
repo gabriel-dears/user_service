@@ -1,6 +1,7 @@
 package com.hospital_app.user_service.application.service;
 
-import com.hospital_app.user_service.application.port.out.CustomUserRepository;
+import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
+import com.hospital_app.user_service.application.service.user.FindByIdUserUseCaseImpl;
 import com.hospital_app.user_service.domain.exception.UserNotFoundException;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;

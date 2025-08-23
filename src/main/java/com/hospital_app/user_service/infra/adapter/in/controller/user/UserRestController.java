@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.adapter.in.controller.user;
 
-import com.hospital_app.user_service.application.port.in.FindByIdUserUseCase;
+import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import com.hospital_app.user_service.infra.mapper.dto.UserDtoMapper;

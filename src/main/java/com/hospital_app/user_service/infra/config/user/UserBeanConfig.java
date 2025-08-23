@@ -1,8 +1,8 @@
 package com.hospital_app.user_service.infra.config.user;
 
-import com.hospital_app.user_service.application.port.in.FindByIdUserUseCase;
-import com.hospital_app.user_service.application.port.out.CustomUserRepository;
-import com.hospital_app.user_service.application.service.FindByIdUserUseCaseImpl;
+import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
+import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
+import com.hospital_app.user_service.application.service.user.FindByIdUserUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

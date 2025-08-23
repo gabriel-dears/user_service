@@ -1,4 +1,4 @@
-package com.hospital_app.user_service.application.port.in;
+package com.hospital_app.user_service.application.port.in.user;
 
 import com.hospital_app.user_service.domain.model.User;
 

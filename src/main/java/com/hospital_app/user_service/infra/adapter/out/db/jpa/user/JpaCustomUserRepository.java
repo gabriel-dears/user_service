@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
-import com.hospital_app.user_service.application.port.out.CustomUserRepository;
+import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.mapper.db.JpaUserMapper;
 import org.springframework.stereotype.Repository;
