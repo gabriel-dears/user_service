@@ -11,6 +11,7 @@ public class JpaUserMapper {
         var jpaEntity = new JpaUserEntity();
         jpaEntity.setId(user.getId());
         jpaEntity.setUsername(user.getUsername());
+        jpaEntity.setEmail(user.getEmail());
         jpaEntity.setPasswordHash(user.getPasswordHash());
         jpaEntity.setEnabled(user.isEnabled());
         jpaEntity.setRole(user.getRole());
@@ -21,9 +22,12 @@ public class JpaUserMapper {
         var domainUser = new User();
         domainUser.setId(jpaUserEntity.getId());
         domainUser.setUsername(jpaUserEntity.getUsername());
+        domainUser.setEmail(jpaUserEntity.getEmail());
         domainUser.setEnabled(jpaUserEntity.isEnabled());
         domainUser.setRole(jpaUserEntity.getRole());
         domainUser.setPasswordHash(jpaUserEntity.getPasswordHash());
+        domainUser.setCreatedAt(jpaUserEntity.getCreatedAt());
+        domainUser.setUpdatedAt(jpaUserEntity.getUpdatedAt());
         return domainUser;
     }
 

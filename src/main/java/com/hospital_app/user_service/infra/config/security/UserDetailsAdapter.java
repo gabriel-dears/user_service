@@ -2,6 +2,7 @@ package com.hospital_app.user_service.infra.config.security;
 
 
 import com.hospital_app.user_service.domain.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Getter
 public class UserDetailsAdapter implements UserDetails {
 
     private final User user;
@@ -33,7 +35,4 @@ public class UserDetailsAdapter implements UserDetails {
         return user.getUsername();
     }
 
-    public User getUser() {
-        return user;
-    }
 }

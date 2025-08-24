@@ -2,12 +2,20 @@ package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
 import com.hospital_app.user_service.domain.model.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
 public class JpaUserEntity {
 
     @Id
@@ -17,6 +25,11 @@ public class JpaUserEntity {
     @Column(unique = true)
     @Size(min = 5, max = 50)
     private String username;
+
+    @Column(unique = true)
+    @Email
+    @Size(max = 100)
+    String email;
 
     @Size(min = 10, max = 255)
     private String passwordHash;
@@ -28,43 +41,20 @@ public class JpaUserEntity {
     @Column(nullable = false)
     private Role role;
 
-    public UUID getId() {
-        return id;
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    private void prePersist() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    @PreUpdate
+    private void preUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }

@@ -7,5 +7,12 @@ import java.util.UUID;
 
 public interface CustomUserRepository {
     Optional<User> findById(UUID id);
+
     Optional<User> findByUsername(String username);
+
+    User create(User user);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByUsername(String username);
 }

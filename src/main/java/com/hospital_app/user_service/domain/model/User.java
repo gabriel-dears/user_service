@@ -6,6 +6,7 @@ import java.util.UUID;
 public class User {
     private UUID id;
     private String username;
+    private String email;
     private String passwordHash;
     private Role role;
     private boolean enabled;
@@ -66,5 +67,13 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
