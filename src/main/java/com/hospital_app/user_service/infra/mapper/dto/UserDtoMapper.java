@@ -15,6 +15,7 @@ public class UserDtoMapper {
         user.setRole(Role.valueOf(userRequestDto.role()));
         user.setUsername(userRequestDto.username());
         user.setEmail(userRequestDto.email());
+        user.setPasswordHash(userRequestDto.password());
         return user;
     }
 
