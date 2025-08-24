@@ -11,6 +11,7 @@ public class UserDtoMapper {
 
     public User toDomain(UserRequestDto userRequestDto) {
         User user = new User();
+        user.setName(userRequestDto.name());
         user.setRole(Role.valueOf(userRequestDto.role()));
         user.setUsername(userRequestDto.username());
         user.setEmail(userRequestDto.email());
@@ -20,6 +21,7 @@ public class UserDtoMapper {
     public UserResponseDto toResponseDto(User user) {
         return new UserResponseDto(
                 user.getId(),
+                user.getName(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getRole().name(),

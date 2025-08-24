@@ -22,6 +22,10 @@ public class JpaUserEntity {
     @GeneratedValue
     private UUID id;
 
+    @Column(nullable = false)
+    @Size(min = 3, max = 255)
+    private String name;
+
     @Column(unique = true)
     @Size(min = 5, max = 50)
     private String username;

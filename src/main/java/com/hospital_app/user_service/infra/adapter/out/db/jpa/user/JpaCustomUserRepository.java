@@ -40,12 +40,12 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public boolean existsByEmail(String email) {
-        return jpaUserRepository.existsByEmail(email);
+        return jpaUserRepository.existsByEmailAndEnabledIsTrue(email);
     }
 
     @Override
     public boolean existsByUsername(String username) {
-        return jpaUserRepository.existsByUsername(username);
+        return jpaUserRepository.existsByUsernameAndEnabledIsTrue(username);
     }
 
 }

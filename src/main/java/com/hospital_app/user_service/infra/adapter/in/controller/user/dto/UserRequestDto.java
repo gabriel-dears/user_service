@@ -6,15 +6,18 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record UserRequestDto(
-        @NotBlank
-        @Size(min = 5, max = 50)
+        @NotBlank(message = "Name cannot be blank")
+        @Size(min = 3, max = 255, message = "Name length must be between 3 and 255 characters")
+        String name,
+        @NotBlank(message = "Username cannot be blank")
+        @Size(min = 5, max = 50, message = "Username length must be between 5 and 50 characters")
         String username,
-        @NotBlank
-        @Email
-        @Size(max = 100)
+        @NotBlank(message = "Email cannot be blank")
+        @Email(message = "Invalid email")
+        @Size(max = 100, message = "Email length must be less than 100 characters")
         String email,
-        @NotBlank
-        @Size(min = 10, max = 50)
+        @NotBlank(message = "Password cannot be blank")
+        @Size(min = 10, max = 50, message = "Password length must be between 10 and 50 characters")
         String password,
         @Pattern(regexp = "(ADMIN|USER|NURSE|PATIENT)", message = "Invalid role")
         String role
