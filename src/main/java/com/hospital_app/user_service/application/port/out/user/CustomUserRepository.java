@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface CustomUserRepository {
     Optional<User> findById(UUID id);
+    Optional<User> findByUsername(String username);
 }
