@@ -1,6 +1,5 @@
 package com.hospital_app.user_service.infra.adapter.out.security;
 
-import com.hospital_app.jwt_security_common.infra.utils.JwtUtils;
 import com.hospital_app.user_service.application.exception.TokenGenerationFailedException;
 import com.hospital_app.user_service.application.port.out.security.TokenService;
 import org.springframework.stereotype.Service;
