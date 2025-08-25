@@ -39,7 +39,7 @@ class CreateUserUseCaseImplTest {
 
         // Arrange
 
-        doThrow(UsernameAlreadyExistsException.class).when(customUserRepository).create(any(User.class));
+        doThrow(UsernameAlreadyExistsException.class).when(userInputValidator).validate(any(User.class));
 
         // Act and Assert
 
@@ -52,7 +52,7 @@ class CreateUserUseCaseImplTest {
 
         // Arrange
 
-        doThrow(EmailAlreadyExistsException.class).when(customUserRepository).create(any(User.class));
+        doThrow(EmailAlreadyExistsException.class).when(userInputValidator).validate(any(User.class));
 
         // Act and Assert
 

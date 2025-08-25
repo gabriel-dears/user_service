@@ -65,4 +65,21 @@ public class JpaCustomUserRepository implements CustomUserRepository {
         );
     }
 
+    @Override
+    public boolean existsByEmailForAnotherId(String email, UUID id) {
+        return jpaUserRepository.existsByEmailAndIdNot(email, id);
+    }
+
+    @Override
+    public boolean existsByUsernameForAnotherId(String username, UUID id) {
+        return jpaUserRepository.existsByUsernameAndIdNot(username, id);
+    }
+
+    @Override
+    public User update(User user) {
+        var userEntity = jpaUserMapper.toEntity(user);
+        var createdUserEntity = jpaUserRepository.save(userEntity);
+        return jpaUserMapper.toDomain(createdUserEntity);
+    }
+
 }

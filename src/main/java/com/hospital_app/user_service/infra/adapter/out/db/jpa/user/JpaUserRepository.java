@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
+
     Optional<JpaUserEntity> findByUsernameAndEnabledIsTrue(String username);
 
     boolean existsByEmail(String email);
@@ -19,4 +20,10 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
     Optional<JpaUserEntity> findByIdAndEnabledIsTrue(UUID id);
 
     Page<JpaUserEntity> findByEnabledIsTrue(Pageable pageable);
+
+    boolean existsByEmailAndIdNot(String email, UUID id);
+
+    boolean existsByUsernameAndIdNot(String username, UUID id);
+
+
 }

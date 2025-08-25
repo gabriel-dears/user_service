@@ -3,22 +3,34 @@ package com.hospital_app.user_service.infra.mapper.dto;
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class UserDtoMapper {
 
-    public User toDomain(UserRequestDto userRequestDto) {
+    public User toDomain(CreateUserRequestDto createUserRequestDto) {
         User user = new User();
-        user.setName(userRequestDto.name());
-        user.setRole(Role.valueOf(userRequestDto.role()));
-        user.setUsername(userRequestDto.username());
-        user.setEmail(userRequestDto.email());
-        user.setPasswordHash(userRequestDto.password());
+        user.setName(createUserRequestDto.name());
+        user.setRole(Role.valueOf(createUserRequestDto.role()));
+        user.setUsername(createUserRequestDto.username());
+        user.setEmail(createUserRequestDto.email());
+        user.setPasswordHash(createUserRequestDto.password());
+        return user;
+    }
+
+    public User toDomain(UpdateUserRequestDto updateUserRequestDto, UUID id) {
+        User user = new User();
+        user.setId(id);
+        user.setName(updateUserRequestDto.name());
+        user.setRole(Role.valueOf(updateUserRequestDto.role()));
+        user.setUsername(updateUserRequestDto.username());
+        user.setEmail(updateUserRequestDto.email());
         return user;
     }
 

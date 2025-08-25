@@ -1,7 +1,9 @@
 package com.hospital_app.user_service.infra.swagger;
 
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserRequestDto;
+import com.hospital_app.user_service.domain.model.User;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ public interface UserApi {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    default ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserRequestDto userRequestDto) {
+    default ResponseEntity<UserResponseDto> create(@RequestBody @Valid CreateUserRequestDto createUserRequestDto) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -25,7 +27,7 @@ public interface UserApi {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    default ResponseEntity<ApplicationPage<UserResponseDto>> update(@PathVariable UUID id, @RequestBody @Valid UserRequestDto userRequestDto) {
+    default ResponseEntity<User> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

@@ -18,4 +18,10 @@ public interface CustomUserRepository {
     boolean existsByUsername(String username);
 
     ApplicationPage<User> findAll(int pageNumber, int pageSize);
+
+    boolean existsByEmailForAnotherId(String email, UUID id);
+
+    boolean existsByUsernameForAnotherId(String username, UUID id);
+
+    User update(User user);
 }

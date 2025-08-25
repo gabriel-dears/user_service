@@ -4,8 +4,10 @@ import com.hospital_app.user_service.application.common.pagination.ApplicationPa
 import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
 import com.hospital_app.user_service.application.port.in.user.FindAllUserUseCase;
 import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
+import com.hospital_app.user_service.application.port.in.user.UpdateUserUseCase;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import com.hospital_app.user_service.infra.mapper.dto.UserDtoMapper;
 import com.hospital_app.user_service.infra.swagger.UserApi;
@@ -22,12 +24,14 @@ public class UserRestController implements UserApi {
     private final FindByIdUserUseCase findByIdUserUseCase;
     private final CreateUserUseCase createUserUseCase;
     private final FindAllUserUseCase findAllUserUseCase;
+    private final UpdateUserUseCase updateUserUseCase;
     private final UserDtoMapper userDtoMapper;
 
-    public UserRestController(FindByIdUserUseCase findByIdUserUseCase, CreateUserUseCase createUserUseCase, FindAllUserUseCase findAllUserUseCase, UserDtoMapper userDtoMapper) {
+    public UserRestController(FindByIdUserUseCase findByIdUserUseCase, CreateUserUseCase createUserUseCase, FindAllUserUseCase findAllUserUseCase, UpdateUserUseCase updateUserUseCase, UserDtoMapper userDtoMapper) {
         this.findByIdUserUseCase = findByIdUserUseCase;
         this.createUserUseCase = createUserUseCase;
         this.findAllUserUseCase = findAllUserUseCase;
+        this.updateUserUseCase = updateUserUseCase;
         this.userDtoMapper = userDtoMapper;
     }
 
@@ -40,8 +44,8 @@ public class UserRestController implements UserApi {
 
     @PostMapping
     @Override
-    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserRequestDto userRequestDto) {
-        User domain = userDtoMapper.toDomain(userRequestDto);
+    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid CreateUserRequestDto createUserRequestDto) {
+        User domain = userDtoMapper.toDomain(createUserRequestDto);
         User createdUser = createUserUseCase.execute(domain);
         return ResponseEntity.ok(userDtoMapper.toResponseDto(createdUser));
     }
@@ -52,9 +56,9 @@ public class UserRestController implements UserApi {
         return ResponseEntity.ok(userDtoMapper.toResponseDto(findAllUserUseCase.execute(pageNumber, pageSize)));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Override
-    public ResponseEntity<ApplicationPage<UserResponseDto>> update(@PathVariable UUID id, @RequestBody @Valid UserRequestDto userRequestDto) {
+    public ResponseEntity<User> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
         // TODO: implement update and change user status
         // TODO: tests
         // TODO: send values as env variables -> docker compose
@@ -65,7 +69,8 @@ public class UserRestController implements UserApi {
         // TODO: remover oauth client do common security
         // TODO: move private key to the user service only
         // TODO: move JwtUtils to the user service only (user-service - generates the token and validates the token, appointments-service - validates the token)
-        throw new UnsupportedOperationException("Not yet implemented");
+        User updatedUser = updateUserUseCase.execute(userDtoMapper.toDomain(updateUserRequestDto, id));
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
