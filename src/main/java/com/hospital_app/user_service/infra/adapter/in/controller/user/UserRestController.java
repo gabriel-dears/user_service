@@ -83,7 +83,7 @@ public class UserRestController implements UserApi {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("{id}/change-password")
+    @PatchMapping("{id}/change-password")
     @Override
     public ResponseEntity<Void> changePassword(@PathVariable UUID id, @RequestBody @Valid ChangeUserPasswordRequestDto changeUserPasswordRequestDto) {
         String newPassword = changeUserPasswordRequestDto.newPassword();
