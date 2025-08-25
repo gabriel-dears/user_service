@@ -27,7 +27,7 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public Optional<User> findById(UUID id) {
-        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findByIdAndEnabledIsTrue(id));
+        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findById(id));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public ApplicationPage<User> findAll(int pageNumber, int pageSize) {
-        Page<JpaUserEntity> paginatedUsers = jpaUserRepository.findByEnabledIsTrue((PageRequest.of(pageNumber, pageSize)));
+        Page<JpaUserEntity> paginatedUsers = jpaUserRepository.findAll((PageRequest.of(pageNumber, pageSize)));
         return new ApplicationPage<>(
                 paginatedUsers.getNumber(),
                 paginatedUsers.getSize(),
