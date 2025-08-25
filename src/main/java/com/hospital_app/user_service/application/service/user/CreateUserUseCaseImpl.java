@@ -21,7 +21,6 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
     @Override
     public User execute(User user) {
         userRequestInputValidator.validate(user);
-        // TODO: add filters in the get list.. filtering where enabled = true
         user.setEnabled(true);
         String encodedPassword = passwordEncoder.encode(user.getPasswordHash());
         user.setPasswordHash(encodedPassword);
