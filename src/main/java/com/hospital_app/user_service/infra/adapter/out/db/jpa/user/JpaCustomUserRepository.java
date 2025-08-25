@@ -4,6 +4,7 @@ import com.hospital_app.user_service.application.common.pagination.ApplicationPa
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.mapper.db.JpaUserMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,11 @@ public class JpaCustomUserRepository implements CustomUserRepository {
     @Override
     public Optional<User> findById(UUID id) {
         return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findByIdAndEnabledIsTrue(id));
+    }
+
+    @Override
+    public boolean existsById(UUID id) {
+        return jpaUserRepository.existsById(id);
     }
 
     @Override
@@ -80,6 +86,12 @@ public class JpaCustomUserRepository implements CustomUserRepository {
         var userEntity = jpaUserMapper.toEntity(user);
         var createdUserEntity = jpaUserRepository.save(userEntity);
         return jpaUserMapper.toDomain(createdUserEntity);
+    }
+
+    @Override
+    @Transactional
+    public void changeUserStatus(UUID id, boolean enabled) {
+        jpaUserRepository.updateEnabled(id, enabled);
     }
 
 }

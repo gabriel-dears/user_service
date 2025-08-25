@@ -7,7 +7,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomUserRepository {
+
     Optional<User> findById(UUID id);
+
+    boolean existsById(UUID id);
 
     Optional<User> findByUsername(String username);
 
@@ -24,4 +27,6 @@ public interface CustomUserRepository {
     boolean existsByUsernameForAnotherId(String username, UUID id);
 
     User update(User user);
+
+    void changeUserStatus(UUID id, boolean status);
 }
