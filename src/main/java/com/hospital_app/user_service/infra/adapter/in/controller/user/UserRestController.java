@@ -58,7 +58,7 @@ public class UserRestController implements UserApi {
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<User> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
+    public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
         // TODO: implement update and change user status
         // TODO: tests
         // TODO: send values as env variables -> docker compose
@@ -70,7 +70,7 @@ public class UserRestController implements UserApi {
         // TODO: move private key to the user service only
         // TODO: move JwtUtils to the user service only (user-service - generates the token and validates the token, appointments-service - validates the token)
         User updatedUser = updateUserUseCase.execute(userDtoMapper.toDomain(updateUserRequestDto, id));
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(userDtoMapper.toResponseDto(updatedUser));
     }
 
     @DeleteMapping("/{id}")

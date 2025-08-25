@@ -27,7 +27,7 @@ public interface UserApi {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    default ResponseEntity<User> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
+    default ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
