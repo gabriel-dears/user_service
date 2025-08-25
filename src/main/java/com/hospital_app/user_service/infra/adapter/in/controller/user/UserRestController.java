@@ -62,6 +62,9 @@ public class UserRestController implements UserApi {
         // TODO: handle errors
         // TODO: add swagger docs
         // TODO: create appointment service
+        // TODO: remover oauth client do common security
+        // TODO: move private key to the user service only
+        // TODO: move JwtUtils to the user service only (user-service - generates the token and validates the token, appointments-service - validates the token)
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
