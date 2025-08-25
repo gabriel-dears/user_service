@@ -31,7 +31,7 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public Optional<User> findByUsername(String username) {
-        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findByUsername(username));
+        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findByUsernameAndEnabledIsTrue(username));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public boolean existsByEmail(String email) {
-        return jpaUserRepository.existsByEmailAndEnabledIsTrue(email);
+        return jpaUserRepository.existsByEmail(email);
     }
 
     @Override
     public boolean existsByUsername(String username) {
-        return jpaUserRepository.existsByUsernameAndEnabledIsTrue(username);
+        return jpaUserRepository.existsByUsername(username);
     }
 
     @Override
