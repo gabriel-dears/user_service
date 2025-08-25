@@ -1,8 +1,11 @@
 package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
+import com.hospital_app.user_service.application.port.in.pagination.ApplicationPage;
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.mapper.db.JpaUserMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -46,6 +49,20 @@ public class JpaCustomUserRepository implements CustomUserRepository {
     @Override
     public boolean existsByUsername(String username) {
         return jpaUserRepository.existsByUsernameAndEnabledIsTrue(username);
+    }
+
+    @Override
+    public ApplicationPage<User> findAll(int pageNumber, int pageSize) {
+        Page<JpaUserEntity> paginatedUsers = jpaUserRepository.findByEnabledIsTrue((PageRequest.of(pageNumber, pageSize)));
+        return new ApplicationPage<>(
+                paginatedUsers.getNumber(),
+                paginatedUsers.getSize(),
+                paginatedUsers.getTotalPages(),
+                paginatedUsers.getTotalElements(),
+                paginatedUsers.isLast(),
+                paginatedUsers.isFirst(),
+                jpaUserMapper.toDomain(paginatedUsers.getContent())
+        );
     }
 
 }

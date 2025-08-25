@@ -4,6 +4,8 @@ import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.out.db.jpa.user.JpaUserEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class JpaUserMapper {
 
@@ -35,4 +37,7 @@ public class JpaUserMapper {
         return domainUser;
     }
 
+    public List<User> toDomain(List<JpaUserEntity> content) {
+        return content.stream().map(this::toDomain).toList();
+    }
 }

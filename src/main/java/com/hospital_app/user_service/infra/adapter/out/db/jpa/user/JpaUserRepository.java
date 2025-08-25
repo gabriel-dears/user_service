@@ -1,5 +1,7 @@
 package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,6 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
     boolean existsByUsernameAndEnabledIsTrue(String username);
 
     Optional<JpaUserEntity> findByIdAndEnabledIsTrue(UUID id);
+
+    Page<JpaUserEntity> findByEnabledIsTrue(Pageable pageable);
 }

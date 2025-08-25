@@ -1,12 +1,14 @@
 package com.hospital_app.user_service.infra.config.user;
 
 import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
+import com.hospital_app.user_service.application.port.in.user.FindAllUserUseCase;
 import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
 import com.hospital_app.user_service.application.port.in.validator.CompositeValidator;
 import com.hospital_app.user_service.application.port.in.validator.InputValidator;
 import com.hospital_app.user_service.application.port.out.security.PasswordEncoderService;
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.application.service.user.CreateUserUseCaseImpl;
+import com.hospital_app.user_service.application.service.user.FindAllUserUseCaseImpl;
 import com.hospital_app.user_service.application.service.user.FindByIdUserUseCaseImpl;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.UniqueEmailValidator;
@@ -27,6 +29,11 @@ public class UserBeanConfig {
     @Bean
     CreateUserUseCase createUserUseCase(CustomUserRepository customUserRepository, PasswordEncoderService passwordEncoderService, InputValidator<User> userInputValidator) {
         return new CreateUserUseCaseImpl(customUserRepository, passwordEncoderService, userInputValidator);
+    }
+
+    @Bean
+    FindAllUserUseCase findAllUserUseCase(CustomUserRepository customUserRepository) {
+        return new FindAllUserUseCaseImpl(customUserRepository);
     }
 
     @Bean
