@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.mapper.dto;
 
-import com.hospital_app.user_service.application.port.in.pagination.ApplicationPage;
+import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserRequestDto;

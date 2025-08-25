@@ -1,4 +1,4 @@
-package com.hospital_app.user_service.application.port.in.pagination;
+package com.hospital_app.user_service.application.common.pagination;
 
 import java.util.List;
 

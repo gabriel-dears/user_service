@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.swagger;
 
-import com.hospital_app.user_service.application.port.in.pagination.ApplicationPage;
+import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import jakarta.validation.Valid;
@@ -22,6 +22,14 @@ public interface UserApi {
     }
 
     default ResponseEntity<ApplicationPage<UserResponseDto>> findAll(@RequestParam int pageNumber, @RequestParam int pageSize) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    default ResponseEntity<ApplicationPage<UserResponseDto>> update(@PathVariable UUID id, @RequestBody @Valid UserRequestDto userRequestDto) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    default ResponseEntity<Void> changeStatus(@PathVariable UUID id, @RequestParam boolean enabled) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

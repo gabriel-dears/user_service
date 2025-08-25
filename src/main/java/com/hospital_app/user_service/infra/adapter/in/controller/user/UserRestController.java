@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.adapter.in.controller.user;
 
-import com.hospital_app.user_service.application.port.in.pagination.ApplicationPage;
+import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
 import com.hospital_app.user_service.application.port.in.user.FindAllUserUseCase;
 import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
@@ -39,6 +39,7 @@ public class UserRestController implements UserApi {
     }
 
     @PostMapping
+    @Override
     public ResponseEntity<UserResponseDto> create(@RequestBody @Valid UserRequestDto userRequestDto) {
         User domain = userDtoMapper.toDomain(userRequestDto);
         User createdUser = createUserUseCase.execute(domain);
@@ -46,8 +47,23 @@ public class UserRestController implements UserApi {
     }
 
     @GetMapping
+    @Override
     public ResponseEntity<ApplicationPage<UserResponseDto>> findAll(@RequestParam int pageNumber, @RequestParam int pageSize) {
         return ResponseEntity.ok(userDtoMapper.toResponseDto(findAllUserUseCase.execute(pageNumber, pageSize)));
+    }
+
+    @PutMapping
+    @Override
+    public ResponseEntity<ApplicationPage<UserResponseDto>> update(@PathVariable UUID id, @RequestBody @Valid UserRequestDto userRequestDto) {
+        // TODO: implement
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @DeleteMapping("/{id}")
+    @Override
+    public ResponseEntity<Void> changeStatus(@PathVariable UUID id, @RequestParam boolean enabled) {
+        // TODO: implement
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 
 }
