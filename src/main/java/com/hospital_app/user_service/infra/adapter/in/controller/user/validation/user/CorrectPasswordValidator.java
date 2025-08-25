@@ -26,8 +26,8 @@ public class CorrectPasswordValidator implements InputValidator<UserPasswordDeta
         UUID userId = userPasswordDetails.userId();
         var existingUser = customUserRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(String.format("User with id %s not found", userId)));
         String passwordHash = existingUser.getPasswordHash();
-        String newPassword = userPasswordDetails.newPassword();
-        if (!passwordEncoder.matches(newPassword, passwordHash)) {
+        String oldPassword = userPasswordDetails.oldPassword();
+        if (!passwordEncoder.matches(oldPassword, passwordHash)) {
             throw new InvalidPasswordException("Old password is incorrect");
         }
     }
