@@ -55,14 +55,16 @@ public class UserRestController implements UserApi {
     @PutMapping
     @Override
     public ResponseEntity<ApplicationPage<UserResponseDto>> update(@PathVariable UUID id, @RequestBody @Valid UserRequestDto userRequestDto) {
-        // TODO: implement
+        // TODO: implement update and change user status
+        // TODO: tests
+        // TODO: send values as env variables -> docker compose
+        // TODO: create insomnia tests collection
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<Void> changeStatus(@PathVariable UUID id, @RequestParam boolean enabled) {
-        // TODO: implement
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
