@@ -94,4 +94,10 @@ public class JpaCustomUserRepository implements CustomUserRepository {
         jpaUserRepository.updateEnabled(id, enabled);
     }
 
+    @Override
+    @Transactional
+    public void updateUserPassword(String passwordHash, UUID id) {
+        jpaUserRepository.updatePassword(passwordHash, id);
+    }
+
 }

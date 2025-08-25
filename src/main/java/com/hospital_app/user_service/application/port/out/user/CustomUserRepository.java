@@ -29,4 +29,6 @@ public interface CustomUserRepository {
     User update(User user);
 
     void changeUserStatus(UUID id, boolean status);
+
+    void updateUserPassword(String passwordHash, UUID id);
 }

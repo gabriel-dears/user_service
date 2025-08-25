@@ -1,22 +1,14 @@
 package com.hospital_app.user_service.infra.config.user;
 
-import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.FindAllUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.UpdateUserUseCase;
+import com.hospital_app.user_service.application.command.UserPasswordDetails;
+import com.hospital_app.user_service.application.port.in.user.*;
 import com.hospital_app.user_service.application.port.in.validator.CompositeValidator;
 import com.hospital_app.user_service.application.port.in.validator.InputValidator;
 import com.hospital_app.user_service.application.port.out.security.PasswordEncoderService;
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
-import com.hospital_app.user_service.application.service.user.CreateUserUseCaseImpl;
-import com.hospital_app.user_service.application.service.user.FindAllUserUseCaseImpl;
-import com.hospital_app.user_service.application.service.user.FindByIdUserUseCaseImpl;
-import com.hospital_app.user_service.application.service.user.UpdateUserUseCaseImpl;
+import com.hospital_app.user_service.application.service.user.*;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.UniqueEmailForAnotherIdValidator;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.UniqueEmailValidator;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.UniqueUsernameForAnotherIdValidator;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.UniqueUsernameValidator;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -47,6 +39,16 @@ public class UserBeanConfig {
     }
 
     @Bean
+    ChangeStatusUserUseCase changeStatusUserUseCase(CustomUserRepository customUserRepository) {
+        return new ChangeStatusUserUseCaseImpl(customUserRepository);
+    }
+
+    @Bean
+    ChangePasswordUserUseCase changePasswordUserUseCase(CustomUserRepository customUserRepository, PasswordEncoderService passwordEncoderService, InputValidator<UserPasswordDetails> userInputValidator) {
+        return new ChangePasswordUserUseCaseImpl(customUserRepository, passwordEncoderService, userInputValidator);
+    }
+
+    @Bean
     @Primary
     InputValidator<User> createUserInputValidator(
             UniqueEmailValidator uniqueEmailValidator,
@@ -59,6 +61,18 @@ public class UserBeanConfig {
                 uniqueUsernameValidator,
                 uniqueEmailForAnotherIdValidator,
                 uniqueUsernameForAnotherIdValidator
+        ));
+    }
+
+    @Bean
+    @Primary
+    InputValidator<UserPasswordDetails> createUserPasswordInputValidator(
+            CorrectPasswordValidator correctPasswordValidator,
+            NewPasswordValidator newPasswordValidator
+    ) {
+        return new CompositeValidator<>(Set.of(
+                correctPasswordValidator,
+                newPasswordValidator
         ));
     }
 

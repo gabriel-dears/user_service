@@ -1,11 +1,10 @@
 package com.hospital_app.user_service.infra.adapter.in.controller.user;
 
+import com.hospital_app.user_service.application.command.UserPasswordDetails;
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
-import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.FindAllUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.FindByIdUserUseCase;
-import com.hospital_app.user_service.application.port.in.user.UpdateUserUseCase;
+import com.hospital_app.user_service.application.port.in.user.*;
 import com.hospital_app.user_service.domain.model.User;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.ChangeUserPasswordRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
@@ -25,13 +24,17 @@ public class UserRestController implements UserApi {
     private final CreateUserUseCase createUserUseCase;
     private final FindAllUserUseCase findAllUserUseCase;
     private final UpdateUserUseCase updateUserUseCase;
+    private final ChangeStatusUserUseCase changeStatusUserUseCase;
+    private final ChangePasswordUserUseCase changePasswordUserUseCase;
     private final UserDtoMapper userDtoMapper;
 
-    public UserRestController(FindByIdUserUseCase findByIdUserUseCase, CreateUserUseCase createUserUseCase, FindAllUserUseCase findAllUserUseCase, UpdateUserUseCase updateUserUseCase, UserDtoMapper userDtoMapper) {
+    public UserRestController(FindByIdUserUseCase findByIdUserUseCase, CreateUserUseCase createUserUseCase, FindAllUserUseCase findAllUserUseCase, UpdateUserUseCase updateUserUseCase, ChangeStatusUserUseCase changeStatusUserUseCase, ChangePasswordUserUseCase changePasswordUserUseCase, UserDtoMapper userDtoMapper) {
         this.findByIdUserUseCase = findByIdUserUseCase;
         this.createUserUseCase = createUserUseCase;
         this.findAllUserUseCase = findAllUserUseCase;
         this.updateUserUseCase = updateUserUseCase;
+        this.changeStatusUserUseCase = changeStatusUserUseCase;
+        this.changePasswordUserUseCase = changePasswordUserUseCase;
         this.userDtoMapper = userDtoMapper;
     }
 
@@ -73,10 +76,21 @@ public class UserRestController implements UserApi {
         return ResponseEntity.ok(userDtoMapper.toResponseDto(updatedUser));
     }
 
-    @DeleteMapping("/{id}")
+    @PatchMapping("/{id}")
     @Override
     public ResponseEntity<Void> changeStatus(@PathVariable UUID id, @RequestParam boolean enabled) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        changeStatusUserUseCase.execute(id, enabled);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("{id}/change-password")
+    @Override
+    public ResponseEntity<Void> changePassword(@PathVariable UUID id, @RequestBody @Valid ChangeUserPasswordRequestDto changeUserPasswordRequestDto) {
+        String newPassword = changeUserPasswordRequestDto.newPassword();
+        String oldPassword = changeUserPasswordRequestDto.oldPassword();
+        UserPasswordDetails userPasswordDetails = new UserPasswordDetails(id, oldPassword, newPassword);
+        changePasswordUserUseCase.execute(userPasswordDetails);
+        return ResponseEntity.ok().build();
     }
 
 }

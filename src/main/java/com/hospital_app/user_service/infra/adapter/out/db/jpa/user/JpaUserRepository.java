@@ -32,4 +32,7 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
     @Query("UPDATE JpaUserEntity u SET u.enabled = :enabled WHERE u.id = :id")
     void updateEnabled(@Param("id") UUID id, @Param("enabled") boolean enabled);
 
+    @Modifying
+    @Query("UPDATE JpaUserEntity u SET u.passwordHash = :passwordHash WHERE u.id = :id")
+    void updatePassword(String passwordHash, UUID id);
 }

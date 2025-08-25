@@ -1,7 +1,7 @@
 package com.hospital_app.user_service.infra.swagger;
 
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
-import com.hospital_app.user_service.domain.model.User;
+import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.ChangeUserPasswordRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
@@ -32,6 +32,10 @@ public interface UserApi {
     }
 
     default ResponseEntity<Void> changeStatus(@PathVariable UUID id, @RequestParam boolean enabled) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    default ResponseEntity<Void> changePassword(@PathVariable UUID id, @RequestBody @Valid ChangeUserPasswordRequestDto changeUserPasswordRequestDto) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
