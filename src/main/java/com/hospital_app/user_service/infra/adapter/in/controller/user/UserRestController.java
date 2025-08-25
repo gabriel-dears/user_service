@@ -59,6 +59,9 @@ public class UserRestController implements UserApi {
         // TODO: tests
         // TODO: send values as env variables -> docker compose
         // TODO: create insomnia tests collection
+        // TODO: handle errors
+        // TODO: add swagger docs
+        // TODO: create appointment service
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
