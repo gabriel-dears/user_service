@@ -13,7 +13,9 @@ import com.hospital_app.user_service.infra.swagger.UserApi;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -47,10 +49,16 @@ public class UserRestController implements UserApi {
 
     @PostMapping
     @Override
-    public ResponseEntity<UserResponseDto> create(@RequestBody @Valid CreateUserRequestDto createUserRequestDto) {
+    public ResponseEntity<UserResponseDto> create(
+            @RequestBody @Valid CreateUserRequestDto createUserRequestDto,
+            UriComponentsBuilder uriBuilder) {
         User domain = userDtoMapper.toDomain(createUserRequestDto);
         User createdUser = createUserUseCase.execute(domain);
-        return ResponseEntity.ok(userDtoMapper.toResponseDto(createdUser));
+        URI location = uriBuilder
+                .path("/user/{id}")
+                .buildAndExpand(createdUser.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(userDtoMapper.toResponseDto(createdUser));
     }
 
     @GetMapping
@@ -62,10 +70,8 @@ public class UserRestController implements UserApi {
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
-        // TODO: implement update and change user status
-        // TODO: tests
-        // TODO: send values as env variables -> docker compose
         // TODO: create insomnia tests collection
+        // TODO: send values as env variables -> docker compose
         // TODO: handle errors
         // TODO: add swagger docs
         // TODO: create appointment service

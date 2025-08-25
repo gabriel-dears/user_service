@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public interface UserApi {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    default ResponseEntity<UserResponseDto> create(@RequestBody @Valid CreateUserRequestDto createUserRequestDto) {
+    default ResponseEntity<UserResponseDto> create(@RequestBody @Valid CreateUserRequestDto createUserRequestDto, UriComponentsBuilder uriBuilder) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
