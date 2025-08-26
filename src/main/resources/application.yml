@@ -2,14 +2,14 @@ spring:
   application:
     name: user_service
   datasource:
-    url: ${HOSPITAL_APP_USER_SERVICE_DB_URL:jdbc:postgresql://user-service-db:5432/user_service_db}
-    username: ${HOSPITAL_APP_USER_SERVICE_DB_USER:user}
-    password: ${HOSPITAL_APP_USER_SERVICE_DB_PASS:pass}
-    driver-class-name: ${HOSPITAL_APP_USER_SERVICE_DB_DRIVER:org.postgresql.Driver}
+    url: ${HOSPITAL_APP_USER_SERVICE_DB_URL}
+    username: ${HOSPITAL_APP_USER_SERVICE_DB_USER}
+    password: ${HOSPITAL_APP_USER_SERVICE_DB_PASS}
+    driver-class-name: ${HOSPITAL_APP_USER_SERVICE_DB_DRIVER}
   jpa:
     hibernate:
-      ddl-auto: ${HOSPITAL_APP_USER_SERVICE_DB_DDL_AUTO:update}
+      ddl-auto: ${HOSPITAL_APP_USER_SERVICE_DB_DDL_AUTO}
     properties:
       hibernate:
-        dialect: ${HOSPITAL_APP_USER_SERVICE_DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+        dialect: ${HOSPITAL_APP_USER_SERVICE_DB_DIALECT}
     show-sql: true
