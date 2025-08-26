@@ -1,6 +1,7 @@
 package com.hospital_app.user_service.infra.config;
 
 import com.hospital_app.user_service.application.port.in.user.CreateUserUseCase;
+import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 import org.springframework.boot.CommandLineRunner;
@@ -11,8 +12,13 @@ import org.springframework.context.annotation.Configuration;
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initAdminUser(CreateUserUseCase createUserUseCase) {
+    CommandLineRunner initAdminUser(CreateUserUseCase createUserUseCase, CustomUserRepository customUserRepository) {
         return args -> {
+
+            if( customUserRepository.existsByUsername("admin") ) {
+                return;
+            }
+
             User user = new User();
             user.setName("Admin");
             user.setUsername("admin");
