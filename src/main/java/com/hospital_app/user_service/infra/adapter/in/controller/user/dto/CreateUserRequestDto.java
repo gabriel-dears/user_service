@@ -19,7 +19,7 @@ public record CreateUserRequestDto(
         @NotBlank(message = "Password cannot be blank")
         @Size(min = 10, max = 50, message = "Password length must be between 10 and 50 characters")
         String password,
-        @Pattern(regexp = "(ADMIN|USER|NURSE|PATIENT)", message = "Invalid role")
+        @Pattern(regexp = "(ADMIN|DOCTOR|NURSE|PATIENT)", message = "Invalid role")
         String role
 ) {
 }
