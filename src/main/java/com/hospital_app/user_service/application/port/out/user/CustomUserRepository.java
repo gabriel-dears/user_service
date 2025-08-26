@@ -1,6 +1,7 @@
 package com.hospital_app.user_service.application.port.out.user;
 
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
+import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 
 import java.util.Optional;
@@ -31,4 +32,6 @@ public interface CustomUserRepository {
     void changeUserStatus(UUID id, boolean status);
 
     void updateUserPassword(String passwordHash, UUID id);
+
+    boolean existsByIdAndRole(UUID id, Role role);
 }

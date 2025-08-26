@@ -1,5 +1,6 @@
 package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
+import com.hospital_app.user_service.domain.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,4 +30,6 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
     @Modifying
     @Query("UPDATE JpaUserEntity u SET u.passwordHash = :passwordHash WHERE u.id = :id")
     void updatePassword(String passwordHash, UUID id);
+
+    boolean existsByIdAndRole(UUID id, Role role);
 }

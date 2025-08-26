@@ -2,6 +2,7 @@ package com.hospital_app.user_service.infra.adapter.out.db.jpa.user;
 
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
+import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.mapper.db.JpaUserMapper;
 import jakarta.transaction.Transactional;
@@ -98,6 +99,11 @@ public class JpaCustomUserRepository implements CustomUserRepository {
     @Transactional
     public void updateUserPassword(String passwordHash, UUID id) {
         jpaUserRepository.updatePassword(passwordHash, id);
+    }
+
+    @Override
+    public boolean existsByIdAndRole(UUID id, Role role) {
+        return jpaUserRepository.existsByIdAndRole(id, role);
     }
 
 }

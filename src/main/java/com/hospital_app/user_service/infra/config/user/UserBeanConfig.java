@@ -49,6 +49,11 @@ public class UserBeanConfig {
     }
 
     @Bean
+    ExistsByIdUserUseCase existsByIdUserUseCase(CustomUserRepository customUserRepository) {
+        return new ExistsByIdUserUseCaseImpl(customUserRepository);
+    }
+
+    @Bean
     @Primary
     InputValidator<User> createUserInputValidator(
             UniqueEmailValidator uniqueEmailValidator,
