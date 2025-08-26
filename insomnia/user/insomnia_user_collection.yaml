@@ -1,0 +1,340 @@
+type: collection.insomnia.rest/5.0
+name: Hospital App - User
+meta:
+  id: wrk_de3f7b80834a4e9b9f2dc271ba468719
+  created: 1756156437208
+  modified: 1756156437208
+  description: ""
+collection:
+  - name: login
+    meta:
+      id: fld_073a73e873b44b068ee58ff42134a6f7
+      created: 1756156449794
+      modified: 1756163219258
+      sortKey: -1756156449794
+      description: ""
+    children:
+      - url: localhost:8080/login
+        name: Login
+        meta:
+          id: req_1a4bca0053114466a8a466145a39dc84
+          created: 1756156460480
+          modified: 1756162955283
+          isPrivate: false
+          description: ""
+          sortKey: -1756159124272
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"user": "admin",
+            	"password": "admin"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        scripts:
+          afterResponse: |-
+            try {
+
+            	// Parse the JSON response
+            	const body = JSON.parse(insomnia.response.body);
+
+            	// Check for token field
+            	if (body.jwtToken) {
+            		// Set environment variable "token"
+            		insomnia.environment.set("token", body.jwtToken);
+            		console.log("Token set:", body.jwtToken);
+            	} else {
+            		console.log("No token found in response:", body.jwtToken);
+            	}
+            } catch (err) {
+            	return;
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: crud
+    meta:
+      id: fld_0e4fe8918fdc44b28c23bfaf12e02135
+      created: 1756156455714
+      modified: 1756163230340
+      sortKey: -1756156489107
+      description: ""
+    children:
+      - url: localhost:8080/user
+        name: Create user
+        meta:
+          id: req_21ee3ed0073d4c3c8767238f54c9f632
+          created: 1756156528419
+          modified: 1756162248570
+          isPrivate: false
+          description: ""
+          sortKey: -1756159329377
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Gabriel Soares",
+            	"username": "gabr2222i2323l2222221",
+            	"email": "gabrie232222l222322133@gmail.com",
+            	"password": "gabrielgabriel22232",
+            	"role": "PATIENT"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_7c0f9904c933493ea83793d5d43416af
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_a53ac3b1cd0343d58e7efb265df52c76
+          - id: pair_ffbd4bceeb4c4cfd93544c3f4798f43e
+            name: Authorization
+            value: Bearer {{ _.token }}
+            description: ""
+            disabled: false
+        scripts:
+          afterResponse: >
+            try {
+                // Parse response and request bodies
+                const body = JSON.parse(insomnia.response.body);
+                const requestBody = JSON.parse(insomnia.request.body);
+
+                console.log("Response body:", body);
+            		console.log("Request body:", requestBody);
+            	  console.log(insomnia.response.status)
+
+                // Only set last_created_user_password if response status is 201
+                if (insomnia.response.status === "Created") {
+            			
+            			if(requestBody && requestBody.password) {
+            				insomnia.environment.set("last_created_user_password", requestBody.password);
+                    console.log("Password saved:", requestBody.password);
+            			}
+            			
+            			if (body && body.id) {
+                    insomnia.environment.set("user_id", body.id);
+                    console.log("User ID set:", body.id);
+            			} else {
+            					console.log("No user ID found in response.");
+            			}
+            		}
+            } catch (err) {
+                console.error("Error in response handling:", err);
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/user/{{user_id}}
+        name: Update user
+        meta:
+          id: req_c964699ac996441099c223cfdbbcbaf5
+          created: 1756159320317
+          modified: 1756159631823
+          isPrivate: false
+          description: ""
+          sortKey: -1756159329352
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Gabriel Soares",
+            	"username": "gabriel221",
+            	"email": "gabriel221@gmail.com",
+            	"role": "ADMIN"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_2e15c1425f3c4fa4a819247c5ef6270b
+          - id: pair_0397beacb23a4168be714fce6d27c0ec
+            name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/user/{{user_id}}
+        name: Change user status
+        meta:
+          id: req_8b78ff41099048d8a3b9f0bace4379ab
+          created: 1756159325999
+          modified: 1756161437339
+          isPrivate: false
+          description: ""
+          sortKey: -1756159325999
+        method: PATCH
+        parameters:
+          - id: pair_3d09a42071034ce9aa575d2719c8d124
+            name: enabled
+            value: "false"
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_fb01e39fc2e74846bc09511d8441d9a8
+          - id: pair_7f547558b132415abecdbe513cf87f87
+            name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/user/{{user_id}}
+        name: Find by ID
+        meta:
+          id: req_63ce0dc61d4a4fbf90f8ff0717e5755f
+          created: 1756159327590
+          modified: 1756161452653
+          isPrivate: false
+          description: ""
+          sortKey: -1756159329364.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_41071e98f8624f5ea7accf842e38f11b
+          - id: pair_8481e9e7a25e4da0b90cfeee8d1fbbb1
+            name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/user?pageNumber=0&pageSize=10
+        name: Find list
+        meta:
+          id: req_928b5a2b165a4b37b66b3bbdd9c1cb58
+          created: 1756159329177
+          modified: 1756162283238
+          isPrivate: false
+          description: ""
+          sortKey: -1756159329302
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_a75781920cf34727bfd8c4bf225c8356
+          - id: pair_6d0dbf387a214ce5befc2bf4455c70d2
+            name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/user/{{user_id}}/change-password
+        name: Change password
+        meta:
+          id: req_c7dc968cc00c446581ba66c40b78205d
+          created: 1756159376838
+          modified: 1756162219549
+          isPrivate: false
+          description: ""
+          sortKey: -1756159329277
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"oldPassword": "{{last_created_user_password}}",
+            	"newPassword": "gabrielgabriel123123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_54d22bb97d0f4c4aab203796e86285e2
+          - name: User-Agent
+            value: insomnia/11.4.0
+            id: pair_cb9b1a087b264660a5f3a63d8b6eddf3
+          - id: pair_e7128016f3944f3b9855908b7822e468
+            name: Authorization
+            value: Bearer {{token}}
+            description: ""
+            disabled: false
+        scripts:
+          afterResponse: >
+            try {
+                // Parse response and request bodies
+                const requestBody = JSON.parse(insomnia.request.body);
+
+            		console.log("Request body:", requestBody);
+            	  console.log(insomnia.response.status)
+
+                // Only set last_created_user_password if response status is 201
+                if (insomnia.response.status === "OK") {
+            			
+            			if(requestBody && requestBody.newPassword) {
+            				insomnia.environment.set("last_created_user_password", requestBody.newPassword);
+                    console.log("Password saved:", requestBody.newPassword);
+            			}
+            		}
+            } catch (err) {
+                console.error("Error in response handling:", err);
+            }
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a0f19d2f12da1f60a1bbe900eeeaa9ce9e9993e0
+    created: 1756156437209
+    modified: 1756163230337
+environments:
+  name: Base Environment
+  meta:
+    id: env_a0f19d2f12da1f60a1bbe900eeeaa9ce9e9993e0
+    created: 1756156437209
+    modified: 1756163230338
+    isPrivate: false
+  data:
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTc1NjE2NjgxOSwiaWF0IjoxNzU2MTYzMjE5fQ.TVXSyTBiABUqmBu2gAG8qze2ibFeZD0p6SlLz_na6MgkoKoWUusvgckc_WcAu_hIDqDFyXk7PidlcwQfrDtGf6dvalzaw_OkeKc81I_rdhfsHUVRKTe_CBL-O4qy67_bVoVvlb4YSFZzVVpdU-xJHoOuAegmb7KJ_8-EqHQf_H_d58ojacK-dlc442-blIwCZxFtOufk5GsT7_ZA6Vf1Hoje2UJAy6f_NTjaVRbcJucl5MnbIgjr-hC6xQ_DkvnoyEJI0wkhHF2K2Xo7-PnYBBgNuDpcd8IjzrrzSmgiVWLLGYQe5UxCqV2FITgjstN_fK_NsUHGFZWGakFJHKHiwg
+    user_id: 6a1973af-8c16-4a16-8986-9b7f9ed45b86
+    last_created_user_password: gabrielgabriel123123
