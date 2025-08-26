@@ -10,6 +10,7 @@ import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.Update
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import com.hospital_app.user_service.infra.mapper.dto.UserDtoMapper;
 import com.hospital_app.user_service.infra.swagger.UserApi;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User", description = "Operations related to user management")
 public class UserRestController implements UserApi {
 
     private final FindByIdUserUseCase findByIdUserUseCase;
@@ -70,14 +72,6 @@ public class UserRestController implements UserApi {
     @PutMapping("/{id}")
     @Override
     public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
-        // TODO: create insomnia tests collection
-        // TODO: send values as env variables -> docker compose
-        // TODO: handle errors
-        // TODO: add swagger docs
-        // TODO: create appointment service
-        // TODO: remover oauth client do common security
-        // TODO: move private key to the user service only
-        // TODO: move JwtUtils to the user service only (user-service - generates the token and validates the token, appointments-service - validates the token)
         User updatedUser = updateUserUseCase.execute(userDtoMapper.toDomain(updateUserRequestDto, id));
         return ResponseEntity.ok(userDtoMapper.toResponseDto(updatedUser));
     }
