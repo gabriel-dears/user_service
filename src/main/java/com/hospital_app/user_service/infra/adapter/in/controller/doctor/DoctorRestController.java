@@ -22,7 +22,7 @@ public class DoctorRestController implements DoctorApi {
         this.existsByIdUserUseCase = existsByIdUserUseCase;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/exists")
     public ResponseEntity<DoctorExistsResponseDto> doctorExists(@PathVariable UUID id) {
         return ResponseEntity.ok(new DoctorExistsResponseDto(existsByIdUserUseCase.execute(id, Role.DOCTOR)));
     }
