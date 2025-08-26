@@ -103,7 +103,7 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public boolean existsByIdAndRole(UUID id, Role role) {
-        return jpaUserRepository.existsByIdAndRole(id, role);
+        return jpaUserRepository.existsByIdAndRoleAndEnabledIsTrue(id, role);
     }
 
 }
