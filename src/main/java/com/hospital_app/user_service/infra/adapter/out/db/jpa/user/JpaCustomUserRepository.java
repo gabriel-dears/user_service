@@ -17,18 +17,16 @@ import java.util.UUID;
 public class JpaCustomUserRepository implements CustomUserRepository {
 
     private final JpaUserRepository jpaUserRepository;
-    private final JpaUserHelper jpaUserHelper;
     private final JpaUserMapper jpaUserMapper;
 
-    public JpaCustomUserRepository(JpaUserRepository jpaUserRepository, JpaUserHelper jpaUserHelper, JpaUserMapper jpaUserMapper) {
+    public JpaCustomUserRepository(JpaUserRepository jpaUserRepository, JpaUserMapper jpaUserMapper) {
         this.jpaUserRepository = jpaUserRepository;
-        this.jpaUserHelper = jpaUserHelper;
         this.jpaUserMapper = jpaUserMapper;
     }
 
     @Override
     public Optional<User> findById(UUID id) {
-        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findById(id));
+        return jpaUserRepository.findById(id).map(jpaUserMapper::toDomain);
     }
 
     @Override
@@ -38,7 +36,7 @@ public class JpaCustomUserRepository implements CustomUserRepository {
 
     @Override
     public Optional<User> findByUsername(String username) {
-        return jpaUserHelper.getOptionalUserFromDb(() -> jpaUserRepository.findByUsernameAndEnabledIsTrue(username));
+        return jpaUserRepository.findByUsernameAndEnabledIsTrue(username).map(jpaUserMapper::toDomain);
     }
 
     @Override
