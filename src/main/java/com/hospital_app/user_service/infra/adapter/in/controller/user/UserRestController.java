@@ -10,7 +10,6 @@ import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.Update
 import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
 import com.hospital_app.user_service.infra.mapper.dto.UserDtoMapper;
 import com.hospital_app.user_service.infra.swagger.UserApi;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name = "User", description = "Operations related to user management")
 public class UserRestController implements UserApi {
 
     private final FindByIdUserUseCase findByIdUserUseCase;

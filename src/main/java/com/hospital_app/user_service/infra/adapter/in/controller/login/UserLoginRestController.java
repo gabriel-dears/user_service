@@ -5,7 +5,6 @@ import com.hospital_app.user_service.application.port.in.login.LoginUserUseCase;
 import com.hospital_app.user_service.infra.adapter.in.controller.login.dto.UserLoginRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.controller.login.dto.UserLoginResponseDto;
 import com.hospital_app.user_service.infra.swagger.UserLoginApi;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/login")
-@Tag(name = "Authentication", description = "Operations related to user login and authentication")
 public class UserLoginRestController implements UserLoginApi {
 
     private final LoginUserUseCase loginUserUseCase;

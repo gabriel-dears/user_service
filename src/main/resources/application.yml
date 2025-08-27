@@ -13,3 +13,7 @@ spring:
       hibernate:
         dialect: ${HOSPITAL_APP_USER_SERVICE_DB_DIALECT}
     show-sql: true
+springdoc:
+  swagger-ui:
+    config-url: /user-service/v3/api-docs/swagger-config
+    url: /user-service/v3/api-docs
