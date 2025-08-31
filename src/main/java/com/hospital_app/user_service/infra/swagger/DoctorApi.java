@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.swagger;
 
-import com.hospital_app.user_service.infra.adapter.in.controller.doctor.dto.DoctorExistsResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.doctor.dto.DoctorExistsResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -8,7 +8,7 @@ import com.hospital_app.user_service.application.port.out.security.PasswordEncod
 import com.hospital_app.user_service.application.port.out.user.CustomUserRepository;
 import com.hospital_app.user_service.application.service.user.*;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.validation.user.*;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.validation.user.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

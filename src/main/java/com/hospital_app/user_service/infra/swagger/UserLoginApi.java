@@ -1,8 +1,8 @@
 package com.hospital_app.user_service.infra.swagger;
 
 import com.hospital_app.user_service.application.exception.TokenGenerationFailedException;
-import com.hospital_app.user_service.infra.adapter.in.controller.login.dto.UserLoginRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.login.dto.UserLoginResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.login.dto.UserLoginRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.login.dto.UserLoginResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
 package com.hospital_app.user_service.infra.swagger;
 
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.ChangeUserPasswordRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.ChangeUserPasswordRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -17,3 +17,8 @@ springdoc:
   swagger-ui:
     config-url: /user-service/v3/api-docs/swagger-config
     url: /user-service/v3/api-docs
+grpc:
+  server:
+    port: 9090
+    security:
+      enabled: false

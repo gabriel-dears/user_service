@@ -3,9 +3,9 @@ package com.hospital_app.user_service.infra.mapper.dto;
 import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.CreateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UpdateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.controller.user.dto.UserResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
