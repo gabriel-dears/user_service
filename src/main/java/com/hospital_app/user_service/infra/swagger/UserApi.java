@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.swagger;
 
-import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
+import com.hospital_app.common.db.pagination.ApplicationPage;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.ChangeUserPasswordRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;

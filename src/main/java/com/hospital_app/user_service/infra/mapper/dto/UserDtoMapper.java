@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.infra.mapper.dto;
 
-import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
+import com.hospital_app.common.db.pagination.ApplicationPage;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
@@ -48,10 +48,10 @@ public class UserDtoMapper {
 
     public ApplicationPage<UserResponseDto> toResponseDto(ApplicationPage<User> userApplicationPage) {
         return new ApplicationPage<>(
-                userApplicationPage.getGetPageNumber(),
-                userApplicationPage.getGetPageSize(),
-                userApplicationPage.getGetTotalPages(),
-                userApplicationPage.getGetTotalElements(),
+                userApplicationPage.getPageNumber(),
+                userApplicationPage.getPageSize(),
+                userApplicationPage.getTotalPages(),
+                userApplicationPage.getTotalElements(),
                 userApplicationPage.isLast(),
                 userApplicationPage.isFirst(),
                 toResponseDto(userApplicationPage.getContent())

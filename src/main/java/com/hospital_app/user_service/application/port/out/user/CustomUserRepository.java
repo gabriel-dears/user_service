@@ -1,6 +1,6 @@
 package com.hospital_app.user_service.application.port.out.user;
 
-import com.hospital_app.user_service.application.common.pagination.ApplicationPage;
+import com.hospital_app.common.db.pagination.ApplicationPage;
 import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 
