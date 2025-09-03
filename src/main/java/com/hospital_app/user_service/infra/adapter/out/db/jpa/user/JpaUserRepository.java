@@ -32,4 +32,5 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
     void updatePassword(String passwordHash, UUID id);
 
     boolean existsByIdAndRoleAndEnabledIsTrue(UUID id, Role role);
+
 }

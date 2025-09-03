@@ -4,6 +4,8 @@ import com.hospital_app.user_service.application.exception.TokenGenerationFailed
 import com.hospital_app.user_service.application.port.out.security.TokenService;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class JwtTokenService implements TokenService {
 
@@ -14,9 +16,9 @@ public class JwtTokenService implements TokenService {
     }
 
     @Override
-    public String generateToken(String username, String role) throws TokenGenerationFailedException {
+    public String generateToken(String username, String role, UUID userId) throws TokenGenerationFailedException {
         try {
-            return jwtUtils.generateToken(username, role);
+            return jwtUtils.generateToken(username, role, userId);
         } catch (Exception e) {
             throw new TokenGenerationFailedException("Error while generating token!", e);
         }

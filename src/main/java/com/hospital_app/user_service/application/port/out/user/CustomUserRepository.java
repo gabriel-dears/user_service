@@ -34,4 +34,5 @@ public interface CustomUserRepository {
     void updateUserPassword(String passwordHash, UUID id);
 
     boolean existsByIdAndRole(UUID id, Role role);
+
 }

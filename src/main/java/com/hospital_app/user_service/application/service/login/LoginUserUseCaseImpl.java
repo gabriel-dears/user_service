@@ -18,6 +18,6 @@ public class LoginUserUseCaseImpl implements LoginUserUseCase {
     @Override
     public String execute(String username, String password) {
         AuthDetailsDto authDetailsDto = authenticator.authenticate(username, password);
-        return tokenService.generateToken(authDetailsDto.username(), authDetailsDto.role());
+        return tokenService.generateToken(authDetailsDto.username(), authDetailsDto.role(), authDetailsDto.id());
     }
 }

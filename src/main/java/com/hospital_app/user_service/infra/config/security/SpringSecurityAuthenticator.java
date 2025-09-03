@@ -30,7 +30,8 @@ public class SpringSecurityAuthenticator implements Authenticator {
         String replacedRole = role.getAuthority().replace("ROLE_", "");
         return new AuthDetailsDto(
                 username,
-                replacedRole
+                replacedRole,
+                userDetails.getUser().getId()
         );
     }
 }

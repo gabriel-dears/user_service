@@ -17,6 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.Instant;
 import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -25,12 +26,13 @@ public class JwtUtils {
     @Value("classpath:private.key")
     private Resource privateKeyResource;
 
-    public String generateToken(String username, String role) throws JOSEException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+    public String generateToken(String username, String role, UUID userId) throws JOSEException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
         JWTClaimsSet claims = new JWTClaimsSet.Builder()
                 .subject(username)
                 .issueTime(Date.from(Instant.now()))
                 .expirationTime(Date.from(Instant.now().plusSeconds(TimeUnit.HOURS.toSeconds(1))))
                 .claim("role", role)
+                .claim("user_id", userId)
                 .build();
 
         JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.RS256).type(JOSEObjectType.JWT).build();
