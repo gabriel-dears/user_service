@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoginBeanConfig {
 
+    // TODO - filter with email
     @Bean
     LoginUserUseCase loginUserUseCase(TokenService tokenService, Authenticator authenticator) {
         return new LoginUserUseCaseImpl(tokenService, authenticator);
