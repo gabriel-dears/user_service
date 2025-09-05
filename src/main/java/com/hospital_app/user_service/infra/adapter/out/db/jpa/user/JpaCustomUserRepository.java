@@ -114,4 +114,14 @@ public class JpaCustomUserRepository implements CustomUserRepository {
         return UserDbOperationWrapper.execute(() -> jpaUserRepository.existsByIdAndRoleAndEnabledIsTrue(id, role));
     }
 
+    @Override
+    public boolean existsByCpf(String cpf) {
+        return UserDbOperationWrapper.execute(() -> jpaUserRepository.existsByCpf(cpf));
+    }
+
+    @Override
+    public boolean existsByCpfForAnotherId(String cpf, UUID id) {
+        return UserDbOperationWrapper.execute(() -> jpaUserRepository.existsByCpfAndIdNot(cpf, id));
+    }
+
 }

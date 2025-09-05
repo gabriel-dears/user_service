@@ -12,6 +12,7 @@ public class JpaUserMapper {
     public JpaUserEntity toEntity(User user) {
         var jpaEntity = new JpaUserEntity();
         jpaEntity.setId(user.getId());
+        jpaEntity.setCpf(user.getCpf());
         jpaEntity.setName(user.getName());
         jpaEntity.setUsername(user.getUsername());
         jpaEntity.setEmail(user.getEmail());
@@ -26,6 +27,7 @@ public class JpaUserMapper {
     public User toDomain(JpaUserEntity jpaUserEntity) {
         var domainUser = new User();
         domainUser.setId(jpaUserEntity.getId());
+        domainUser.setCpf(jpaUserEntity.getCpf());
         domainUser.setName(jpaUserEntity.getName());
         domainUser.setUsername(jpaUserEntity.getUsername());
         domainUser.setEmail(jpaUserEntity.getEmail());

@@ -35,4 +35,7 @@ public interface CustomUserRepository {
 
     boolean existsByIdAndRole(UUID id, Role role);
 
+    boolean existsByCpf(String cpf);
+
+    boolean existsByCpfForAnotherId(String cpf, UUID id);
 }

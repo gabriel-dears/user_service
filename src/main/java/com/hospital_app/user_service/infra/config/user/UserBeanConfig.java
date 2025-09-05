@@ -59,13 +59,17 @@ public class UserBeanConfig {
             UniqueEmailValidator uniqueEmailValidator,
             UniqueUsernameValidator uniqueUsernameValidator,
             UniqueEmailForAnotherIdValidator uniqueEmailForAnotherIdValidator,
-            UniqueUsernameForAnotherIdValidator uniqueUsernameForAnotherIdValidator
+            UniqueUsernameForAnotherIdValidator uniqueUsernameForAnotherIdValidator,
+            UniqueCpfValidator uniqueCpfValidator,
+            UniqueCpfForAnotherIdValidator uniqueCpfForAnotherIdValidator
     ) {
         return new CompositeValidator<>(Set.of(
                 uniqueEmailValidator,
                 uniqueUsernameValidator,
                 uniqueEmailForAnotherIdValidator,
-                uniqueUsernameForAnotherIdValidator
+                uniqueUsernameForAnotherIdValidator,
+                uniqueCpfValidator,
+                uniqueCpfForAnotherIdValidator
         ));
     }
 

@@ -6,6 +6,7 @@ import java.util.UUID;
 public class User {
     private UUID id;
     private String name;
+    private String cpf;
     private String username;
     private String email;
     private String passwordHash;
@@ -84,5 +85,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

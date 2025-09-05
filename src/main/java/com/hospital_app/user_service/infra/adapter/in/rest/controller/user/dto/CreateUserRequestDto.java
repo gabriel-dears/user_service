@@ -1,5 +1,6 @@
 package com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto;
 
+import com.hospital_app.user_service.infra.annotation.input.cpf.ClearCpf;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -16,6 +17,9 @@ public record CreateUserRequestDto(
         @Email(message = "Invalid email")
         @Size(max = 100, message = "Email length must be less than 100 characters")
         String email,
+        @NotBlank(message = "CPF cannot be blank")
+        @ClearCpf
+        String cpf,
         @NotBlank(message = "Password cannot be blank")
         @Size(min = 10, max = 50, message = "Password length must be between 10 and 50 characters")
         String password,

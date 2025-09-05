@@ -17,6 +17,7 @@ public class UserDtoMapper {
     public User toDomain(CreateUserRequestDto createUserRequestDto) {
         User user = new User();
         user.setName(createUserRequestDto.name());
+        user.setCpf(createUserRequestDto.cpf());
         user.setRole(Role.valueOf(createUserRequestDto.role()));
         user.setUsername(createUserRequestDto.username());
         user.setEmail(createUserRequestDto.email());
@@ -27,6 +28,7 @@ public class UserDtoMapper {
     public User toDomain(UpdateUserRequestDto updateUserRequestDto, UUID id) {
         User user = new User();
         user.setId(id);
+        user.setCpf(updateUserRequestDto.cpf());
         user.setName(updateUserRequestDto.name());
         user.setRole(Role.valueOf(updateUserRequestDto.role()));
         user.setUsername(updateUserRequestDto.username());

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -34,6 +35,10 @@ public class JpaUserEntity {
     @Email
     @Size(max = 100)
     String email;
+
+    @Column(unique = true)
+    @CPF
+    String cpf;
 
     @Size(min = 10, max = 255)
     private String passwordHash;

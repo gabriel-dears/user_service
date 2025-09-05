@@ -33,4 +33,7 @@ public interface JpaUserRepository extends JpaRepository<JpaUserEntity, UUID> {
 
     boolean existsByIdAndRoleAndEnabledIsTrue(UUID id, Role role);
 
+    boolean existsByCpf(String cpf);
+
+    boolean existsByCpfAndIdNot(String cpf, UUID id);
 }
