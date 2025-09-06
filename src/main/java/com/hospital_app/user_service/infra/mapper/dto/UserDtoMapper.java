@@ -5,6 +5,7 @@ import com.hospital_app.user_service.domain.model.Role;
 import com.hospital_app.user_service.domain.model.User;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseByIdDto;
 import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseDto;
 import org.springframework.stereotype.Component;
 
@@ -62,5 +63,17 @@ public class UserDtoMapper {
 
     public List<UserResponseDto> toResponseDto(List<User> content) {
         return content.stream().map(this::toResponseDto).toList();
+    }
+
+    public UserResponseByIdDto toResponseByIdDto(User createdUser) {
+        return new UserResponseByIdDto(
+                createdUser.getId(),
+                createdUser.getName(),
+                createdUser.getUsername(),
+                createdUser.getEmail(),
+                createdUser.getCpf(),
+                createdUser.getRole().name(),
+                createdUser.isEnabled()
+        );
     }
 }

@@ -20,8 +20,8 @@ public class UniqueEmailForAnotherIdValidator implements InputValidator<User> {
 
     @Override
     public void validate(User input) {
-        String email = input.getEmail();
         UUID id = input.getId();
+        String email = input.getEmail();
         if (UserInputValidatorHelper.isUpdateUserFlow(id) && customUserRepository.existsByEmailForAnotherId(email, id)) {
             throw new EmailAlreadyExistsException(String.format("Email %s already exists", email));
         }

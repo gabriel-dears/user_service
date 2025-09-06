@@ -1,10 +1,7 @@
 package com.hospital_app.user_service.infra.swagger;
 
 import com.hospital_app.common.db.pagination.ApplicationPage;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.ChangeUserPasswordRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,7 +29,7 @@ public interface UserApi {
                     @ApiResponse(responseCode = "404", description = "User not found")
             }
     )
-    ResponseEntity<UserResponseDto> findById(
+    ResponseEntity<UserResponseByIdDto> findById(
             @Parameter(description = "ID of the user to be retrieved") @PathVariable UUID id
     );
 
@@ -45,7 +42,7 @@ public interface UserApi {
                     @ApiResponse(responseCode = "400", description = "Invalid input")
             }
     )
-    ResponseEntity<UserResponseDto> create(
+    ResponseEntity<UserResponseByIdDto> create(
             @RequestBody @Valid CreateUserRequestDto createUserRequestDto,
             UriComponentsBuilder uriBuilder
     );
@@ -72,7 +69,7 @@ public interface UserApi {
                     @ApiResponse(responseCode = "404", description = "User not found")
             }
     )
-    ResponseEntity<UserResponseDto> update(
+    ResponseEntity<UserResponseByIdDto> update(
             @Parameter(description = "ID of the user to update") @PathVariable UUID id,
             @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto
     );

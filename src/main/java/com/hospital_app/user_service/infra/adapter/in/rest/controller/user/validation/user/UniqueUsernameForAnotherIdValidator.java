@@ -20,10 +20,10 @@ public class UniqueUsernameForAnotherIdValidator implements InputValidator<User>
 
     @Override
     public void validate(User input) {
-        String email = input.getEmail();
+        String username = input.getUsername();
         UUID id = input.getId();
-        if (UserInputValidatorHelper.isUpdateUserFlow(id) && customUserRepository.existsByUsernameForAnotherId(email, id)) {
-            throw new UsernameAlreadyExistsException(String.format("Username %s already exists", email));
+        if (UserInputValidatorHelper.isUpdateUserFlow(id) && customUserRepository.existsByUsernameForAnotherId(username, id)) {
+            throw new UsernameAlreadyExistsException(String.format("Username %s already exists", username));
         }
     }
 

@@ -23,6 +23,7 @@ public class DataInitializer {
             user.setName("Admin");
             user.setUsername("admin");
             user.setEmail("admin@email.com");
+            user.setCpf("063.086.090-48");
             user.setPasswordHash("admin");
             user.setRole(Role.ADMIN);
             createUserUseCase.execute(user);

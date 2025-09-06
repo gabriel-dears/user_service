@@ -81,7 +81,7 @@ class UserRestControllerTest {
 
     @Test
     void createUser_returnsCreatedWithLocationAndBody() throws Exception {
-        CreateUserRequestDto request = new CreateUserRequestDto("Mary", "mary01", "mary@example.com", "verysecurepwd", "PATIENT");
+        CreateUserRequestDto request = new CreateUserRequestDto("Mary", "mary01", "mary@example.com", "477.278.470-54", "verysecurepwd", "PATIENT");
         User toCreate = new User();
         toCreate.setName("Mary");
         toCreate.setUsername("mary01");
@@ -137,7 +137,7 @@ class UserRestControllerTest {
     @Test
     void updateUser_returnsOkWithBody() throws Exception {
         UUID id = UUID.randomUUID();
-        UpdateUserRequestDto request = new UpdateUserRequestDto("New Name", "newuser", "new@example.com", "NURSE");
+        UpdateUserRequestDto request = new UpdateUserRequestDto("New Name", "newuser", "new@example.com", "477.278.470-54", "NURSE");
         User toUpdate = new User();
         toUpdate.setId(id);
         toUpdate.setName("New Name");

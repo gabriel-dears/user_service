@@ -20,8 +20,8 @@ public class UniqueCpfForAnotherIdValidator implements InputValidator<User> {
 
     @Override
     public void validate(User input) {
-        String cpf = input.getCpf();
         UUID id = input.getId();
+        String cpf = input.getCpf();
         if (UserInputValidatorHelper.isUpdateUserFlow(id) && customUserRepository.existsByCpfForAnotherId(cpf, id)) {
             throw new CpfAlreadyExistsException(String.format("CPF %s already exists", cpf));
         }

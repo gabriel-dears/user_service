@@ -4,10 +4,7 @@ import com.hospital_app.common.db.pagination.ApplicationPage;
 import com.hospital_app.user_service.application.command.UserPasswordDetails;
 import com.hospital_app.user_service.application.port.in.user.*;
 import com.hospital_app.user_service.domain.model.User;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.ChangeUserPasswordRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.CreateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UpdateUserRequestDto;
-import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.UserResponseDto;
+import com.hospital_app.user_service.infra.adapter.in.rest.controller.user.dto.*;
 import com.hospital_app.user_service.infra.mapper.dto.UserDtoMapper;
 import com.hospital_app.user_service.infra.swagger.UserApi;
 import jakarta.validation.Valid;
@@ -42,14 +39,14 @@ public class UserRestController implements UserApi {
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponseDto> findById(@PathVariable UUID id) {
+    public ResponseEntity<UserResponseByIdDto> findById(@PathVariable UUID id) {
         User user = findByIdUserUseCase.execute(id);
-        return ResponseEntity.ok(userDtoMapper.toResponseDto(user));
+        return ResponseEntity.ok(userDtoMapper.toResponseByIdDto(user));
     }
 
     @PostMapping
     @Override
-    public ResponseEntity<UserResponseDto> create(
+    public ResponseEntity<UserResponseByIdDto> create(
             @RequestBody @Valid CreateUserRequestDto createUserRequestDto,
             UriComponentsBuilder uriBuilder) {
         User domain = userDtoMapper.toDomain(createUserRequestDto);
@@ -58,7 +55,7 @@ public class UserRestController implements UserApi {
                 .path("/user/{id}")
                 .buildAndExpand(createdUser.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(userDtoMapper.toResponseDto(createdUser));
+        return ResponseEntity.created(location).body(userDtoMapper.toResponseByIdDto(createdUser));
     }
 
     @GetMapping
@@ -69,9 +66,9 @@ public class UserRestController implements UserApi {
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
+    public ResponseEntity<UserResponseByIdDto> update(@PathVariable UUID id, @RequestBody @Valid UpdateUserRequestDto updateUserRequestDto) {
         User updatedUser = updateUserUseCase.execute(userDtoMapper.toDomain(updateUserRequestDto, id));
-        return ResponseEntity.ok(userDtoMapper.toResponseDto(updatedUser));
+        return ResponseEntity.ok(userDtoMapper.toResponseByIdDto(updatedUser));
     }
 
     @PatchMapping("/{id}")

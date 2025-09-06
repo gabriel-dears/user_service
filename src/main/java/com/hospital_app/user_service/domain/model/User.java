@@ -92,6 +92,12 @@ public class User {
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if (cpf != null) {
+            String cleaned = cpf.replaceAll("\\D", "");
+            this.cpf = cleaned.replaceFirst("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+        } else {
+            this.cpf = null;
+        }
     }
+
 }

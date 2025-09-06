@@ -23,6 +23,7 @@ class UserDtoMapperTest {
                 "John Doe",
                 "johndoe",
                 "john.doe@example.com",
+                "846.345.530-15",
                 "supersecurepwd",
                 "ADMIN"
         );
@@ -44,6 +45,7 @@ class UserDtoMapperTest {
                 "Jane Roe",
                 "janeroe",
                 "jane.roe@example.com",
+                "846.345.530-15",
                 "NURSE"
         );
 

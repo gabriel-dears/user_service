@@ -27,17 +27,18 @@ public class JpaUserEntity {
     @Size(min = 3, max = 255)
     private String name;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     @Size(min = 5, max = 50)
     private String username;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     @Email
     @Size(max = 100)
     String email;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     @CPF
+    @Size(max = 14)
     String cpf;
 
     @Size(min = 10, max = 255)
