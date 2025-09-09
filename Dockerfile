@@ -35,11 +35,17 @@ RUN groupadd --gid 1000 appgroup \
 
 WORKDIR /app
 
+# Copy JAR
 COPY --from=build /app/user_service/target/user_service-0.0.1-SNAPSHOT.jar app.jar
-RUN chown appuser:appgroup /app/app.jar
+
+# Copy TLS certs into classpath location
+COPY user_service/src/main/resources/tls /app/tls
+
+#RUN chown -R appuser:appgroup /app/tls /app/app.jar
+
 USER appuser
 
-EXPOSE 8080 5005
+EXPOSE 8080 5005 9090
 
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
