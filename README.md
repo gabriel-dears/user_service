@@ -31,8 +31,8 @@ There are two common ways to run this service.
 - Prerequisites: Docker and Docker Compose
 - From the repo root, start DB and this service:
   docker compose up -d user-service user-service-db
-- HTTP base URL: http://localhost:8081
-- Swagger UI: http://localhost:8081/swagger-ui/index.html
+- HTTP base URL: http://localhost:8000/users
+- Swagger UI: http://localhost:8000/users/swagger-ui/index.html
 - gRPC server: localhost:9090 (TLS/mTLS)
 - PostgreSQL (service DB): localhost:5437 (mapped to container 5432)
 
@@ -166,7 +166,6 @@ Other
 - gRPC TLS errors: ensure cert files exist under user_service/src/main/resources/tls and env vars point to the correct classpath locations.
 - DB connection failures: confirm user-service-db container is healthy and env vars are correct (see .env).
 - 401/403 on REST: verify JWT token and roles; /user/** requires ADMIN.
-- Swagger not loading: check that the service is on http://localhost:8081 and that springdoc is included.
 
 
 ## Project paths and references
