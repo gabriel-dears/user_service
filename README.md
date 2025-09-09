@@ -55,6 +55,22 @@ Base paths:
 - /doctor
 - /patient
 
+### Base Admin User
+
+Before interacting with the API, note that the User Service creates a **base admin user** using the environment variables:
+
+- `INITIAL_ADMIN_NAME`
+- `INITIAL_ADMIN_USERNAME`
+- `INITIAL_ADMIN_EMAIL`
+- `INITIAL_ADMIN_CPF`
+- `INITIAL_ADMIN_PASSWORD`
+
+This admin user allows you to **start using the API immediately**:
+
+- Log in via `/login` using the admin credentials.
+- Create additional users, assign roles, and explore service functionalities.
+- The admin user acts as the starting point for all operations in the system.
+
 Authentication and authorization:
 - JWT required for most endpoints; /login is public.
 - /user/** requires role ADMIN (see UserSecurityConfiguration).
