@@ -22,15 +22,7 @@ grpc:
     port: 9090
     security:
       enabled: true
-      certificate-chain: classpath:tls/user_service.crt
-      private-key: classpath:tls/user_service_pkcs8.key
-      trust-cert-collection: classpath:tls/ca.crt
-      client-auth: REQUIRE
-
-
-logging:
-  level:
-    io:
-      grpc:
-        netty: DEBUG
-        internal: DEBUG
+      certificate-chain: ${HOSPITAL_APP_USER_SERVICE_CRT}
+      private-key: ${HOSPITAL_APP_USER_SERVICE_KEY}
+      trust-cert-collection: ${HOSPITAL_APP_USER_SERVICE_CA}
+      client-auth: ${HOSPITAL_APP_USER_SERVICE_CLIENT_AUTH}
